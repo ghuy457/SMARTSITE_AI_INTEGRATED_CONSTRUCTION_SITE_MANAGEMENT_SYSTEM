@@ -1,5 +1,7 @@
 package ui;
 
+import static ui.Draft.pause;
+
 public class MenuUserLv02 extends MenuUserLv03 {
     
 //    @Override
@@ -23,6 +25,7 @@ public class MenuUserLv02 extends MenuUserLv03 {
         switch (choice){
             case (5):
                 System.out.println("Function not complete yet!");
+                pause();
                 break;
             default:
                 super.chooseOption(choice);

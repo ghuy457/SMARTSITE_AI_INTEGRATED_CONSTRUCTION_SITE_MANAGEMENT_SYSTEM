@@ -1,5 +1,7 @@
 package ui;
         
+import static ui.Draft.pause;
+
 public class MenuUserLv03 extends MenuUserLv00{    
     @Override
     public void displayOption(){
@@ -16,22 +18,26 @@ public class MenuUserLv03 extends MenuUserLv00{
                 break;
             case (1):
                 System.out.println("Function not complete yet!");
+                pause();
                 //displayInformation();
                 break;
             case (2):
                 System.out.println("Function not complete yet!");
                 //getCheckInTime();
+                pause();
                 break;
             case (3):
                 System.out.println("Function not complete yet!");
                 //getCheckOutTime();
+                pause();
                 break;
             case (4):
                 System.out.println("Function not complete yet!");
-                //Chưa cóa;
+                pause();
                 break;
             default:
                 System.out.println("Invalid choice! Please select again");
+                pause();
         }
     }
     

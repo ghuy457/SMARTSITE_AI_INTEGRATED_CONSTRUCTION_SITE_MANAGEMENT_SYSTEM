@@ -4,6 +4,7 @@ package ui;
 import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import static ui.Draft.clearConsoleIDE;
 
 public class WelcomeMenu {
     public void displayWelcomeMenu(){
@@ -47,7 +48,6 @@ public class WelcomeMenu {
             System.out.println("================================================================================"); //need asycnhron
             switch (choice){
                 case (1):
-                    running = false;
                     clearConsoleIDE();
                     LoginMenu menuLogin = new LoginMenu();
                     menuLogin.displayLoginMenu();
@@ -71,10 +71,5 @@ public class WelcomeMenu {
         } //while (running)
 
     } //displayWelcomeMenu()
-    
-    public static void clearConsoleIDE() { //in dòng trống để làm mới menu (lụm trên Gemini)
-    for (int i = 0; i < 50; i++) {
-        System.out.println();
-    }
-}
+
 }//class

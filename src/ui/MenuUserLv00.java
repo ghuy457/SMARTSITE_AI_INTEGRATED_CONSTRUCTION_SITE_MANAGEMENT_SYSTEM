@@ -1,6 +1,7 @@
 package ui;
         
 import java.util.Scanner;
+import static ui.Draft.pause;
 
 public abstract class MenuUserLv00 {
     
@@ -11,11 +12,12 @@ public abstract class MenuUserLv00 {
             displayHeader(role, name);                  //header
             displayOption();                            //option
             displayLogOut();                            //option 0 (logout)
-            System.out.println("Your action: ");        //choice
+            System.out.println("Your action: ");        
             int choice = sc.nextInt();                  //input choice
-            if (choice==0){
+            if (choice==0){                             //logout
                 running = false;
                 System.out.println("The system is logging out...");
+                pause();
             } else {
                 chooseOption(choice);
             }//ngoac if
