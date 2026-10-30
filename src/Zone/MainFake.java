@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class MainFake {
 
     public static void main(String[] args) {
-        // Lấy Instance quản lý ZoneManager2 (Tự động gọi loadFromFile trong Constructor)
+        // Khởi tạo ZoneManager2 (Tự động gọi loadFromFile trong Constructor)
         ZoneManager2 zm = new ZoneManager2();
 
         System.out.println("==================================================");
-        System.out.println("   AUTOMATED TEST & FILE I/O TESTING PROGRAM");
+        System.out.println("   TEST PROGRAM: RANDOM ZONE CHECK-IN SYSTEM");
         System.out.println("==================================================");
 
         Scanner sc = new Scanner(System.in);
@@ -18,83 +18,82 @@ public class MainFake {
 
         while (running) {
             System.out.println("\n===== ZONE MANAGER TEST MENU =====");
-            System.out.println("[1] Add Regular Zone (addZone)");
-            System.out.println("[2] Add Restricted Zone (addRestrictedZone)");
-            System.out.println("[3] Find Zone by ID (findZoneById)");
-            System.out.println("[4] Update Zone by ID (updateZoneById)");
-            System.out.println("[5] Delete Zone by ID (deleteZoneById)");
-            System.out.println("[6] Display ALL Zones (displayList)");
-            System.out.println("[7] Display Restricted Zones Only (displayRestrictedZonesOnly)");
-            System.out.println("[8] SAVE Data to File (saveToFile)");
-            System.out.println("[9] LOAD Data from File (loadFromFile)");
-            System.out.println("[10] Sort Zone by Id ");
+            System.out.println("[1] Display All Loaded Zones (displayList)");
+            System.out.println("[2] RANDOM Check-in Zone (assignRandomActiveZone)");
+            System.out.println("[3] View Current Area Information (View activeDemoZone)");
+            System.out.println("[4] Sort Zone List by ID (sortListById)");
+            System.out.println("[5] SAVE Data to File (saveToFile)");
+            System.out.println("[6] RELOAD Data from File (loadFromFile)");
             System.out.println("[0] Exit Program");
-            System.out.print("➔ Choose option [0-9]: ");
+            System.out.print("➔ Choose option [0-6]: ");
 
             String input = sc.nextLine().trim();
             switch (input) {
                 case "1":
-                    System.out.println("\n--- [TEST]: Add Regular Zone ---");
-                    zm.addZone();
+                    System.out.println("\n--- [TEST]: Display All Loaded Zones ---");
+                    zm.displayList();
                     break;
 
                 case "2":
-               
-                       System.out.println("\n--- [TEST]: Add Restricted Zone ---");
-                    zm.addRestrictedZone();
+                    System.out.println("\n--- [TEST]: Simulating Sign In & Random Check-in ---");
+                    Zone randomZone = zm.getRandomActiveZone();
+                    if (randomZone != null) {
+                        System.out.println("[SUCCESS] System randomly assigned you to a Zone!");
+                        System.out.println("➔ Checked-in ZoneID   : " + randomZone.getZoneId());
+                        System.out.println("➔ Checked-in ZoneName : " + randomZone.getZoneName());
+                        System.out.println("➔ Allowed Role       : " + randomZone.getAllowedRole());
+                  
+                          System.out.println("➔ Is Restricted      : " + (randomZone.isRestricted() ? "YES" : "NO"));
+                        
+                        if (randomZone instanceof RestrictedZone) {
+                            RestrictedZone rz = (RestrictedZone) randomZone;
+                            System.out.println("➔ Security Passcode  : " + rz.getPinCode());
+                        }
+                    } else {
+                        System.out.println("[!] Check-in failed. Zone list is empty!");
+                    }
                     break;
 
                 case "3":
-                    System.out.println("\n--- [TEST]: Find Zone by ID ---");
-                    System.out.print("Enter ZoneID to search (e.g., ZN0001): ");
-                    String searchId = sc.nextLine().trim();
-                    Zone foundZone = zm.findZoneById(searchId);
-                    if (foundZone != null) {
-                        System.out.println("-> Found: " + foundZone);
-                        System.out.println("-> [isRestricted]: " + foundZone.isRestricted());
-                        System.out.println("-> [toFileString Format]: " + foundZone.toFileString());
+                    System.out.println("\n--- [TEST]: View Current Area Information ---");
+                    Zone current = zm.getActiveZone();
+                    if (current != null) {
+                        System.out.println("--------------------------------------------------");
+                        System.out.println("         CURRENT LOCATION INFORMATION");
+                        System.out.println("--------------------------------------------------");
+                        System.out.println("Zone ID           : " + current.getZoneId());
+                        System.out.println("Zone Name         : " + current.getZoneName());
+                        System.out.println("Details           : " + current.getZoneDetails());
+                        System.out.println("Allowed Role      : " + current.getAllowedRole());
+                        System.out.println("Is Restricted     : " + (current.isRestricted() ? "YES" : "NO"));
+                        if (current instanceof RestrictedZone) {
+                            RestrictedZone rz = (RestrictedZone) current;
+                            System.out.println("Pin Code          : " + rz.getPinCode());
+                        }
+                        System.out.println("--------------------------------------------------");
                     } else {
-                        System.out.println("[!] ZoneID [" + searchId + "] not found.");
+                        System.out.println("[!] You are not checked in any zone yet. Please choose Option [2] first!");
                     }
                     break;
 
                 case "4":
-                    System.out.println("\n--- [TEST]: Update Zone ---");
-                    zm.updateZoneById();
-                    break;
-
-                case "5":
-                    System.out.println("\n--- [TEST]: Delete Zone ---");
-                    zm.deleteZoneById();
-                    break;
-
-                case "6":
-                    System.out.println("\n--- [TEST]: Display All Zones ---");
+                    System.out.println("\n--- [TEST]: Sort List by Zone ID ---");
+                    zm.sortZonesById();
                     zm.displayList();
                     break;
 
-                case "7":
-                    System.out.println("\n--- [TEST]: Display Restricted Zones Only ---");
-                    zm.displayRestrictedZonesOnly();
-                    break;
-
-                case "8":
+                case "5":
                     System.out.println("\n--- [TEST]: Save Data to File ---");
                     zm.saveToFile();
                     break;
 
-                case "9":
-                    System.out.println("\n--- [TEST]: Load Data from File ---");
+                case "6":
+                    System.out.println("\n--- [TEST]: Reload Data from File ---");
                     try {
-                        zm.loadFromFile("Zone6"
-                                + ".txt");
+                        zm.loadFromFile("data/Zone_fake.txt");
                     } catch (IOException e) {
-                        System.out.println("[Error]: Failed to load file: " + e.getMessage());
+                        System.out.println("[Error]: Failed to reload file: " + e.getMessage());
                     }
-                    break;
-                case "10":
-                    System.out.println("Sort Zone");
-                    zm.sortZonesById();
                     break;
 
                 case "0":

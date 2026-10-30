@@ -4,6 +4,7 @@ import java.util.Scanner;
 import Person.PersonManager;
 import Person.Worker;
 import Validatable.InputScanner;
+import Zone.Zone;
 import Zone.ZoneManager2;
 //import Zone.ZoneManager2;
     
@@ -11,7 +12,8 @@ public class UniqueSiteManagerMenu {
    private final Scanner sc2 = new Scanner(System.in);
    // AddPerson và UniqueSiteManagerMenu: lấy cùng danh sách
     private final PersonManager pm;
-
+    ZoneManager2 zm = ZoneManager2.getInstance();
+    Zone activeZone = zm.getRandomActiveZone();
     UniqueSiteManagerMenu() { this(PersonManager.getInstance()); }
 
     UniqueSiteManagerMenu(PersonManager pm) { this.pm = pm; }
@@ -23,6 +25,11 @@ public class UniqueSiteManagerMenu {
             Draft.displayMenuHeader();
             Draft.displayMenuLine();
             Draft.displayMenuGreeting();
+            if (activeZone != null) {
+                System.out.println(Draft.center("CURRENT LOCATION: " + activeZone.getZoneName() + " (" + activeZone.getZoneId() + ")"));
+            } else {
+                System.out.println(Draft.center("CURRENT LOCATION: No active zone assigned"));
+            }
             Draft.displayMenuLine();
             System.out.println("");
             System.out.println(Draft.center("Human Resource Management Menu"));

@@ -16,12 +16,14 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 import ui_Dang_dang_sua.Draft;
 
 public class ZoneManager2 {
 
     private ArrayList<Zone> list;
-    private Zone activeDemoZone;
+    private Zone activeZone;
+    private static ZoneManager2 instance;
 
     public ZoneManager2() {
         this.list = new ArrayList<>();
@@ -31,6 +33,32 @@ public class ZoneManager2 {
         } catch (IOException e) {
             System.out.println("[Notice]: No existing data file found or failed to load. Starting with an empty list.");
         }
+    }
+
+    public static ZoneManager2 getInstance() {
+        if (instance == null) {
+            instance = new ZoneManager2();
+        }
+        return instance;
+    }
+
+    public Zone getRandomActiveZone() {
+        if (list == null || list.isEmpty()) {
+            System.out.println("[Warning]: Zone list is empty! Cannot select a random zone.");
+            return null;
+        }
+
+        if (this.activeZone == null) {
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(list.size());
+            this.activeZone = list.get(randomIndex);
+        }
+
+        return this.activeZone;
+    }
+
+    public Zone getActiveZone() {
+        return activeZone;
     }
 
     public void addZone() {
@@ -162,7 +190,7 @@ public class ZoneManager2 {
         }
     }
 
-      public void sortZonesById() {
+    public void sortZonesById() {
         if (list == null || list.isEmpty()) {
             System.out.println("[Warning]: Zone list is empty. Nothing to sort.");
             return;
@@ -171,7 +199,7 @@ public class ZoneManager2 {
 
         System.out.println("-> Successfully sorted zone list by Zone ID!");
     }
-    
+
     public void addRestrictedZone() {
         Scanner sc = new Scanner(System.in);
         int n;
@@ -281,7 +309,6 @@ public class ZoneManager2 {
                         String pinCode = parts[5].trim();
 
                         zone = new RestrictedZone(id, name, details, allowedRole, pinCode);
-                        System.out.println(zone);
                     } else {
                         System.out.println("[Warning]: Skipped line " + lineNumber + " due to invalid column count.");
                         System.out.println(zone);
@@ -319,16 +346,6 @@ public class ZoneManager2 {
         } catch (IOException e) {
             System.out.println("[Error]: " + e.getMessage());
         }
-    }
-
-    public boolean selectActiveDemoZone(String zoneId) {
-        Zone zone = findZoneById(zoneId);
-        if (zone == null) {
-            return false;
-        }
-
-        activeDemoZone = zone;
-        return true;
     }
 
     private String chooseAllowedRole() {

@@ -7,6 +7,8 @@ import Person.PersonManager;
 import java.io.IOException;
 import Validatable.CheckPassword;
 import Validatable.InputScanner;
+import Zone.Zone;
+import Zone.ZoneManager2;
 import static ui_Dang_dang_sua.Draft.clearConsoleIDE;
 import static ui_Dang_dang_sua.Draft.displayMenuGreeting;
 import static ui_Dang_dang_sua.Draft.displayMenuHeader;
@@ -17,6 +19,8 @@ public class LoginMenu {
     private final CheckPassword checker = new CheckPassword();
     private boolean loadPeople;
     private static boolean peopleLoaded;
+     ZoneManager2 zm = ZoneManager2.getInstance();
+     Zone activeZone = zm.getRandomActiveZone();
 
     // Constructor mặc định tự khởi tạo Manager nếu chưa có
     public LoginMenu() {
@@ -46,6 +50,11 @@ public class LoginMenu {
             displayMenuHeader();//in banner
             displayMenuLine();//in gạch
             displayMenuGreeting();//in lời chào
+             if (activeZone != null) {
+                System.out.println(Draft.center("CURRENT LOCATION: " + activeZone.getZoneName() + " (" + activeZone.getZoneId() + ")"));
+            } else {
+                System.out.println(Draft.center("CURRENT LOCATION: No active zone assigned"));
+            }
             displayMenuLine();//in gạch
             System.out.println("");
             System.out.println(Draft.center("[!] NOTICE: Please enter your code and password below!!!"));
