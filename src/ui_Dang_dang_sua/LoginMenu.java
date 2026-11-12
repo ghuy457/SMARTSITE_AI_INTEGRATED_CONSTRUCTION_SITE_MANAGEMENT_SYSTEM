@@ -114,7 +114,7 @@ public class LoginMenu {
             
             if (activeZone instanceof RestrictedZone) { 
                 String roleUpper = currentUser.getRole().trim().toUpperCase(); 
-                if (!roleUpper.equals("SITE_MANAGER") && !roleUpper.equals("SAFETY_OFFICER")) { 
+                if (!roleUpper.equals("SITE_MANAGER") && !roleUpper.equals("SAFETY_OFFICER") && !roleUpper.equals("ADMIN") ) { 
                     System.out.println(Draft.center(Draft.RED + "[!] ACCESS DENIED: Restricted Zone only allows Site Manager & Safety Officer!" + Draft.BAS)); 
                     System.out.println(Draft.center("Returning to Welcome Menu...")); 
                     Draft.pause(); 

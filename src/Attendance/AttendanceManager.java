@@ -107,45 +107,45 @@ public class AttendanceManager {
         if (currentUser == null || zm == null
                 || currentUser.getId() == null
                 || currentUser.getId().trim().isEmpty()) {
-            System.out.println("Khong co du lieu nguoi dung hoac khu vuc!");
+            System.out.println(Draft.center(Draft.RED+"No data for Person or Zone here!!!"+Draft.BAS));
             return;
         }
 
         if (!currentUser.isActive()) {
-            System.out.println("Tai khoan khong hoat dong!");
+            System.out.println(Draft.center(Draft.RED+"Account is inactive!!!"+Draft.BAS));
             return;
         }
 
         if (findOpenRecord(currentUser.getId()) != null) {
-            System.out.println("Ban da check-in va chua check-out!");
+            System.out.println(Draft.center(Draft.GRN+"You have checked in but haven't checked out yet!!!"));
             return;
         }
         java.util.Scanner sc = Validatable.InputScanner.getScanner();
         if (zm instanceof RestrictedZone) {
-            System.out.print("Enter zone PIN: ");
+            System.out.print(Draft.BLU+"    ➔ Enter zone PIN: "+Draft.BAS);
             if (!sc.hasNextLine()) {
                 return;
             }
             if (!((RestrictedZone) zm).getPinCode().equals(sc.nextLine().trim())) {
-                System.out.println("Incorrect PIN.");
+                System.out.println(Draft.center(Draft.RED+"Incorrect PIN!!!"+Draft.BAS));
                 return;
             }
         }
-        System.out.println(checkIn(currentUser, zm) ? "Check-in successful." : "Check-in failed.");
+        System.out.println(checkIn(currentUser, zm) ? Draft.center(Draft.GRN+"Check-in successful."+Draft.BAS) : Draft.center(Draft.RED+"Check-in failed."+Draft.BAS));
     }
 
     public void checkOutFromInput(Person currentUser) {
         if (currentUser == null
                 || currentUser.getId() == null
                 || currentUser.getId().trim().isEmpty()) {
-            System.out.println("No user has been found!");
+            System.out.println(Draft.center(Draft.RED+"No user has been found!"+Draft.BAS));
             return;
         }
 
         if (checkOut(currentUser.getId())) {
-            System.out.println("Check-out successfully!");
+            System.out.println(Draft.center(Draft.GRN+"Check-out successfully!"+Draft.BAS));
         } else {
-            System.out.println("You may not check-in yet or checked-out!");
+            System.out.println(Draft.center(Draft.RED+"You may not check-in yet or checked-out!"+Draft.BAS));
         }
     }
 
@@ -153,7 +153,7 @@ public class AttendanceManager {
         Person currentUser = ui_Dang_dang_sua.TempSession.getCurrentUser();
 
         if (currentUser == null) {
-            System.out.println("No user has been found!");
+            System.out.println(Draft.center(Draft.RED+"No user has been found!"+Draft.BAS));
             return;
         }
 
@@ -167,7 +167,7 @@ public class AttendanceManager {
         Person currentUser = ui_Dang_dang_sua.TempSession.getCurrentUser();
 
         if (currentUser == null) {
-            System.out.println("Can't find person signing.");
+            System.out.println(Draft.center(Draft.RED+"Can't find person signing."+Draft.BAS));
             return;
         }
 

@@ -68,7 +68,7 @@ public class Draft {
     //hiển thị lời chào
     public static void displayMenuGreeting() {
         System.out.println(Draft.center("WELCOME TO THE S-SMARTSITE"));
-        System.out.println(Draft.center("Version 2.7.4 | Terminal Edition")); //Version Semester.Lab.TimeConfig
+        System.out.println(Draft.center("Version 3.6.9 | Limited Edition")); //Version Semester.Lab.TimeConfig
         // Forrmateed HH/MM/SS: Giờ:Phút:Giây
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 

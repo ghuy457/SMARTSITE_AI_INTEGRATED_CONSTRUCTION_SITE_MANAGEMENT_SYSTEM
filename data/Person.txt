@@ -3,7 +3,11 @@ VISITOR|PR0002|Dang Cong Tu|VS0002|INACTIVE|To observe the process|Tran Soai Ca
 CONTRACTOR|PR0007|Alfred Marshall|PR0003|ACTIVE|Principles of Economics|null
 CONTRACTOR|PR0008|John Maynard Keynes|CT0003|ACTIVE|The General Theory of Employment, Interest, and Money|null
 VISITOR|PR0031|MrBeast|VS0005|ACTIVE|Go for charity work|Khang lo
-VISITOR|PR0034|Rosie|VS0008|ACTIVE|Organize a cultural or artistic performance|Khang lo
-ADMIN|PR111|TranMinhKhang|AD1111|ACTIVE|Admid of the SmartSite System
+SITE_MANAGER|PR2203|Dang Hai Dang|SM0003|ACTIVE|Manage Interface, menu
+VISITOR|PR0034|Rosie|VS0008|ACTIVE|Organize a cultural or artistic performance|Khang
+ADMIN|PR2108|Bui Danh Huong|AD1111|ACTIVE|Teaching PRO192 VIPPROMAX
 WORKER|PR0036|Minh Khang|WK0036|ACTIVE
-VISITOR|PR0037|Khach Hangtiemnang|VS9999|ACTIVE|Tham quan dau tu|Khang
+SITE_MANAGER|PR2512|Bach Gia Huy|SM0002|ACTIVE|Manage Validation, Zone, Incident
+WORKER|PR0051|Truong Van A|WK0051|ACTIVE
+WORKER|PR0052|Dinh Quang B|WK0052|ACTIVE
+WORKER|PR0053|Son Tung Mpt|WK0053|ACTIVE
